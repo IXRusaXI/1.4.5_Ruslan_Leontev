@@ -3,6 +3,7 @@ import DeleteIcon from './../../shared/icons/delete.svg?react';
 import EditIcon from './../../shared/icons/edit.svg?react';
 import { CircularProgressBar } from './../../shared/CircularProgressBar/CircularProgressBar';
 import './style.scss';
+import { translatePriority } from './../../app/types';
 
 export const TaskCard = ({
   task: { id, title, priority, status, progress },
@@ -16,7 +17,7 @@ export const TaskCard = ({
       <div className="flex">
         <span className="priority-title">Приоритет</span>
         <span className={classNames(`priority--${priority}`, 'priority')}>
-          {priority}
+        {translatePriority(priority)}
         </span>
       </div>
       <div className="task-status-wrapper">
