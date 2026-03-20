@@ -1,5 +1,5 @@
 import './App.scss';
-import { TodoList } from './TodoList/TodoList';
+import { TodoList } from './../widgets/TodoList/TodoList.tsx';
 
 const App = () => {
   return (
