@@ -6,7 +6,7 @@ export enum Prioroty {
 
 export enum Status {
   TODO = 'Сделать', // Сделать
-  PROGRESS = 'В прогрессе', // В прогрессе
+  PROGRESS = 'В процессе', // В прогрессе
   DONE = 'Сделано', // Сделано
 }
 
