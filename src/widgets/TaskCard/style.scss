@@ -1,5 +1,5 @@
-@use '../styles/index.scss' as *;
-@use '../styles/breakpoints.scss' as breakpoints;
+@use './../../app/styles/index.scss' as *;
+@use './../../app/styles/breakpoints.scss' as breakpoints;
 
 .task-card {
   background: $white;

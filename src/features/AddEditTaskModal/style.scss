@@ -1,5 +1,5 @@
-@use '../styles/index.scss' as *;
-@use '../styles/breakpoints.scss' as breakpoints;
+@use './../../app/styles/index.scss' as *;
+@use './../../app/styles/breakpoints.scss' as breakpoints;
 
 .add-edit-modal {
   .modal-title {

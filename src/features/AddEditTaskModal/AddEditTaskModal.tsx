@@ -1,8 +1,8 @@
 import classNames from 'classnames';
-import Close from '../assets/icons/close.svg?react';
-import { Button } from '../Button/Button';
-import { Input } from '../Input/Input';
-import { Modal } from '../Modal/Modal';
+import Close from './../../shared/icons/close.svg?react';
+import { Button } from './../../shared/Button/Button';
+import { Input } from './../../shared/Input/Input';
+import { Modal } from './../../shared/Modal/Modal';
 import './style.scss';
 
 export const AddEditTaskModal = () => {

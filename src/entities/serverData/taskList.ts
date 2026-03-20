@@ -1,4 +1,4 @@
-import { Prioroty, Status } from '../types';
+import { Prioroty, Status } from './../../app/types';
 
 export type Task = {
   id: string;

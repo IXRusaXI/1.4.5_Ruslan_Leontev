@@ -1,7 +1,7 @@
 import classNames from 'classnames';
-import DeleteIcon from '../assets/icons/delete.svg?react';
-import EditIcon from '../assets/icons/edit.svg?react';
-import { CircularProgressBar } from '../CircularProgressBar/CircularProgressBar';
+import DeleteIcon from './../../shared/icons/delete.svg?react';
+import EditIcon from './../../shared/icons/edit.svg?react';
+import { CircularProgressBar } from './../../shared/CircularProgressBar/CircularProgressBar';
 import './style.scss';
 
 export const TaskCard = ({
