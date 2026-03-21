@@ -5,9 +5,9 @@ export enum Prioroty {
 }
 
 export enum Status {
-  TODO = 'Сделать', // Сделать
-  PROGRESS = 'В процессе', // В прогрессе
-  DONE = 'Сделано', // Сделано
+  TODO = 'todo', // Сделать
+  PROGRESS = 'progress', // В прогрессе
+  DONE = 'done', // Сделано
 }
 
 export function translatePriority(priority: Prioroty) {
