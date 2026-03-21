@@ -19,14 +19,6 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-
-    "plugins": [
-      {
-        "name": "typescript-plugin-css-modules",
-        "classnameTransform": "camelCase",
-        "customMatcher": "\\.module\\.(scss|sass|css)$"
-      }
-    ]
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]
