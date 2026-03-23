@@ -28,7 +28,7 @@ export const TodoList = () => {
         </div>
       </div>
       {showAddEditModal && <AddEditTaskModal closeModal={() => setShowAddEditModal(false)} />}
-      {showDeleteModal && <DeleteModal />}
+      {showDeleteModal && <DeleteModal closeModal={() => setShowDeleteModal(false)} />}
     </>
   );
 };

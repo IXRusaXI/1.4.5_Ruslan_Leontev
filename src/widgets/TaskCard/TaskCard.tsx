@@ -13,8 +13,6 @@ type TaskCardProps = {
 
 export const TaskCard = ({task: { id, title, priority, status, progress }, showDeleteTaskModal, closeDeleteTaskModal}: TaskCardProps
 ) => {
-  // console.log(showDeleteTaskModal())
-  console.log(!!style[`status--${status}`])
   return (
     <div className={style["task-card"]}>
       <div className="flex w-100">
