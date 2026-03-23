@@ -3,7 +3,7 @@ import DeleteIcon from './../../shared/icons/delete.svg?react';
 import EditIcon from './../../shared/icons/edit.svg?react';
 import { CircularProgressBar } from './../../shared/CircularProgressBar/CircularProgressBar';
 import style from './style.module.scss';
-import { translatePriority } from './../../app/types';
+import { translatePriority, translateStatus } from './../../app/types';
 
 type TaskCardProps = {
   task: {},
@@ -29,7 +29,7 @@ export const TaskCard = ({task: { id, title, priority, status, progress }, showD
       </div>
       <div className={style["task-status-wrapper"]}>
         <button className={classNames(style[`status--${status}`], style.status)}>
-          {status}
+        {translateStatus(status)}
         </button>
       </div>
       <div className={style['progress']}>

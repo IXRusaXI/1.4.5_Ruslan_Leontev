@@ -20,3 +20,14 @@ export function translatePriority(priority: Prioroty) {
       return 'Высокий'
   }
 }
+
+export function translateStatus(status: Status) {
+  switch(status) {
+    case('todo'):
+      return 'Сделать'
+    case('progress'):
+      return 'В процессе'
+    case('done'):
+      return 'Сделано'
+  }
+}
