@@ -5,14 +5,19 @@ import { Input } from './../../shared/Input/Input';
 import { Modal } from './../../shared/Modal/Modal';
 import './style.scss';
 
-export const AddEditTaskModal = () => {
+type EditTaskModalProps = {
+  closeModal: MouseEventHandler<HTMLButtonElement>
+}
+
+export const AddEditTaskModal = ({closeModal}: EditTaskModalProps) => {
+
   return (
     <Modal>
       <form>
         <div className="add-edit-modal">
           <div className="flx-between">
             <span className="modal-title">Добавить задачу</span>
-            <Close className="cp" onClick={() => {}} />
+            <Close className="cp" onClick={() => closeModal()} />
           </div>
           <Input
             label="Задача"
@@ -24,14 +29,22 @@ export const AddEditTaskModal = () => {
           <div className="modal-priority">
             <span>Приортитет</span>
             <ul className="priority-buttons">
-              {['high', 'medium', 'low'].map((priority) => (
-                <li
-                  key={priority}
-                  className={classNames(`${priority}-selected`, priority)}
-                >
-                  {priority}
-                </li>
-              ))}
+              {['high', 'medium', 'low'].map((priority) => {
+                const priorityLabels = {
+                  high: 'высокий',
+                  medium: 'средний',
+                  low: 'низкий'
+                };
+
+                return (
+                  <li
+                    key={priority}
+                    className={classNames(`${priority}-selected`, priority)}
+                  >
+                    {priorityLabels[priority]}
+                  </li>
+                );
+              })}
             </ul>
           </div>
           <div className="flx-right mt-50">

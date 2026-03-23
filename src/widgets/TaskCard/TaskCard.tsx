@@ -5,10 +5,15 @@ import { CircularProgressBar } from './../../shared/CircularProgressBar/Circular
 import style from './style.module.scss';
 import { translatePriority } from './../../app/types';
 
-export const TaskCard = ({
-  task: { id, title, priority, status, progress },
-}) => {
-  console.log(`status--${status}`)
+type TaskCardProps = {
+  task: {},
+  showDeleteTaskModal: MouseEventHandler<HTMLElement>,
+  closeDeleteTaskModal: MouseEventHandler<HTMLElement>
+}
+
+export const TaskCard = ({task: { id, title, priority, status, progress }, showDeleteTaskModal, closeDeleteTaskModal}: TaskCardProps
+) => {
+  // console.log(showDeleteTaskModal())
   console.log(!!style[`status--${status}`])
   return (
     <div className={style["task-card"]}>
@@ -36,7 +41,7 @@ export const TaskCard = ({
       </div>
       <div className={style['actions']}>
         <EditIcon className="mr-20 cp" onClick={() => {}} />
-        <DeleteIcon className="cp" onClick={() => {}} />
+        <DeleteIcon className="cp" onClick={() => showDeleteTaskModal()} />
       </div>
     </div>
   );
