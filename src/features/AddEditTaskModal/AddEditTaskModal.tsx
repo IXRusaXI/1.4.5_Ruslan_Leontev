@@ -31,7 +31,6 @@ export const AddEditTaskModal = ({
   }
   
   function inputActive(evt) {
-    console.log("Нажал знак", event.target.value)
     if (task) {
       task.title = event.target.value
       setName(event.target.value)

@@ -50,7 +50,6 @@ export const TodoList = () => {
   }
 
   function editTask() {
-    // console.log(actualTask)
     const newTask: Task = {
       id: actualTask.id,
       title: taskName,

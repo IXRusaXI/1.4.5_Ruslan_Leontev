@@ -34,7 +34,6 @@ export const TaskCard = ({task: { id, title, priority, status, progress },
   }
 
   function edit() {
-    console.log('Выбранная таска', task)
     setActualTask(task)
     showEditTaskModal()
   }
