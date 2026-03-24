@@ -8,19 +8,38 @@ import { translatePriority, translateStatus } from './../../app/types';
 type TaskCardProps = {
   task: {},
   deleteTaskId: () => {},
-  showDeleteTaskModal: MouseEventHandler<HTMLElement>,
-  showAddTaskModal: MouseEventHandler<HTMLElement>
+  showDeleteTaskModal: () => {},
+  showEditTaskModal: () => {},
+  setActualTask: () => {}
 }
 
 export const TaskCard = ({task: { id, title, priority, status, progress }, 
   deleteTaskId, 
   showDeleteTaskModal, 
-  showAddTaskModal
+  showEditTaskModal,
+  setActualTask
 }: TaskCardProps
 ) => {
+  const task = {
+    id: id,
+    title: title,
+    priority: priority,
+    status: status,
+    progress: progress,
+  }
+
+  if (task)
+
+  // console.log(task)
   function deleteAction() {
     deleteTaskId(),
     showDeleteTaskModal()
+  }
+
+  function edit() {
+    console.log('Выбранная таска', task)
+    setActualTask(task)
+    showEditTaskModal()
   }
 
   return (
@@ -48,7 +67,7 @@ export const TaskCard = ({task: { id, title, priority, status, progress },
         />
       </div>
       <div className={style['actions']}>
-        <EditIcon className="mr-20 cp" onClick={() => showAddTaskModal() } />
+        <EditIcon className="mr-20 cp" onClick={() => edit() } />
         <DeleteIcon className="cp" onClick={() => deleteAction()} />
       </div>
     </div>

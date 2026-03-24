@@ -12,8 +12,6 @@ export const CircularProgressBar = ({ strokeWidth, sqSize, percentage }: Props) 
   const dashArray = radius * Math.PI * 2
   const dashOffset = dashArray - (dashArray * (percentage || 0)) / 100
 
-  console.log(style)
-
   return (
     <svg width={sqSize} height={sqSize} viewBox={viewBox} className={style['circular-progressbar']}>
       <circle
