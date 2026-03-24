@@ -10,8 +10,25 @@ import { useState } from 'react';
 
 
 export const TodoList = () => {
+  const [list, setList] = useState(taskList)
+
   const [showAddEditModal, setShowAddEditModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [deleteTaskId, setDeleteTaskId] = useState('')
+
+  function getDeleteTaskId() {
+    return deleteTaskId
+  }
+
+  function setTaskId(id: string) {
+    setDeleteTaskId(id)
+  }
+
+  function deleteTask(id: string) {
+    const newList = list.filter(task => task.id !== deleteTaskId)
+    setList(newList)
+    setDeleteTaskId('')
+  }
 
   return (
     <>
@@ -21,14 +38,16 @@ export const TodoList = () => {
           <Button title="Добавить задачу" icon={<Add />} onClick={() => setShowAddEditModal(true)} />
         </div>
         <div className={style["task-container"]}>
-          {taskList.map((task) => (
-            <TaskCard task={task} showDeleteTaskModal={() => setShowDeleteModal(true)} 
-              closeDeleteTaskModal={() => setShowDeleteModal(false)} />
+          {list.map((task) => (
+            <TaskCard id={task.id} task={task} showDeleteTaskModal={() => setShowDeleteModal(true)} 
+              showAddTaskModal={() => setShowAddEditModal(true)}
+              deleteTaskId={() => setTaskId(task.id)}
+              />
           ))}
         </div>
       </div>
       {showAddEditModal && <AddEditTaskModal closeModal={() => setShowAddEditModal(false)} />}
-      {showDeleteModal && <DeleteModal closeModal={() => setShowDeleteModal(false)} />}
+      {showDeleteModal && <DeleteModal closeModal={() => setShowDeleteModal(false)}  deleteTask={() => deleteTask(getDeleteTaskId())}/>}
     </>
   );
 };

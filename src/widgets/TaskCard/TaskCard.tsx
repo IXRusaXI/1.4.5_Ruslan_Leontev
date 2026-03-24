@@ -7,12 +7,22 @@ import { translatePriority, translateStatus } from './../../app/types';
 
 type TaskCardProps = {
   task: {},
+  deleteTaskId: () => {},
   showDeleteTaskModal: MouseEventHandler<HTMLElement>,
-  closeDeleteTaskModal: MouseEventHandler<HTMLElement>
+  showAddTaskModal: MouseEventHandler<HTMLElement>
 }
 
-export const TaskCard = ({task: { id, title, priority, status, progress }, showDeleteTaskModal, closeDeleteTaskModal}: TaskCardProps
+export const TaskCard = ({task: { id, title, priority, status, progress }, 
+  deleteTaskId, 
+  showDeleteTaskModal, 
+  showAddTaskModal
+}: TaskCardProps
 ) => {
+  function deleteAction() {
+    deleteTaskId(),
+    showDeleteTaskModal()
+  }
+
   return (
     <div className={style["task-card"]}>
       <div className="flex w-100">
@@ -38,8 +48,8 @@ export const TaskCard = ({task: { id, title, priority, status, progress }, showD
         />
       </div>
       <div className={style['actions']}>
-        <EditIcon className="mr-20 cp" onClick={() => {}} />
-        <DeleteIcon className="cp" onClick={() => showDeleteTaskModal()} />
+        <EditIcon className="mr-20 cp" onClick={() => showAddTaskModal() } />
+        <DeleteIcon className="cp" onClick={() => deleteAction()} />
       </div>
     </div>
   );
