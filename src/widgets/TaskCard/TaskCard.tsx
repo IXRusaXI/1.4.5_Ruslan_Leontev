@@ -28,9 +28,6 @@ export const TaskCard = ({task: { id, title, priority, status, progress },
     progress: progress,
   }
 
-  if (task)
-
-  // console.log(task)
   function deleteAction() {
     deleteTaskId(),
     showDeleteTaskModal()
