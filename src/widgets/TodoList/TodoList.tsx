@@ -7,6 +7,7 @@ import { TaskCard } from '../TaskCard/TaskCard';
 import { taskList } from './../../entities/serverData/taskList';
 import { useState } from 'react';
 import { Prioroty, Status } from './../../app/types';
+import { nanoid } from 'nanoid';
 
 
 export const TodoList = () => {
@@ -21,30 +22,16 @@ export const TodoList = () => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [deleteTaskId, setDeleteTaskId] = useState('')
 
-  function generateId() {
-    let newId = lastId + 1
-    setLastId(newId)
-
-    if (newId < 10) {
-      newId = '0' + newId
-    } else {
-      newId = '' + newId
-    }
-
-    return newId
-  }
-
   function createTask() {
     const newTask: Task = {
-      id: generateId(),
+      id: nanoid(),
       title: taskName,
       priority: priority,
       status: Status.TODO,
       progress: 0,
     }
 
-    let newList = [...list];
-    newList.push(newTask);
+    let newList = [newTask, ...list];
     setList(newList);
     closeCreateModal()
   }

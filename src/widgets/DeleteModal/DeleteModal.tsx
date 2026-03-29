@@ -8,8 +8,6 @@ type DeleteModalProps = {
 }
 
 export const DeleteModal = ({closeModal, deleteTask}: DeleteModalProps) => {
-  console.log(deleteTask)
-  console.log(closeModal)
   function deleteInit() {
     deleteTask()
     closeModal()

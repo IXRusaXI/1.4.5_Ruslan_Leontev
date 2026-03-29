@@ -5,6 +5,8 @@ import { Input } from './../../shared/Input/Input';
 import { Modal } from './../../shared/Modal/Modal';
 import './style.scss';
 import { useState } from 'react';
+import Priority from './../../entities/serverData/priorityes'
+import PriorityTranslator from './../../entities/serverData/priorityesTranslator'
 
 type EditTaskModalProps = {
   closeModal: MouseEventHandler<HTMLButtonElement>,
@@ -66,12 +68,7 @@ export const AddEditTaskModal = ({
           <div className="modal-priority">
             <span>Приортитет</span>
             <ul className="priority-buttons">
-              {['high', 'medium', 'low'].map((priority) => {
-                const priorityLabels = {
-                  high: 'высокий',
-                  medium: 'средний',
-                  low: 'низкий'
-                };
+              {Object.values(Priority).map((priority) => {
 
                 return (
                   <li
@@ -79,7 +76,7 @@ export const AddEditTaskModal = ({
                     onClick={() => selectPriority(priority)}
                     className={classNames(`${priority}-selected`, priority, priority === selectedPriority && 'active')}
                   >
-                    {priorityLabels[priority]}
+                    {PriorityTranslator[priority]}
                   </li>
                 );
               })}

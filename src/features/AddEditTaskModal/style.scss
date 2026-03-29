@@ -37,6 +37,9 @@
     width: 90px;
     text-align: center;
     cursor: pointer;
+    &::marker {
+      content: ''
+    }
   }
   .high {
     border: 1px solid $error-color;
