@@ -4,13 +4,14 @@ import EditIcon from './../../shared/icons/edit.svg?react';
 import { CircularProgressBar } from './../../shared/CircularProgressBar/CircularProgressBar';
 import style from './style.module.scss';
 import { translatePriority, translateStatus } from './../../app/types';
+import { Dispatch, SetStateAction } from 'react';
 
 type TaskCardProps = {
-  task: {},
-  deleteTaskId: () => {},
-  showDeleteTaskModal: () => {},
-  showEditTaskModal: () => {},
-  setActualTask: () => {}
+  task: {id: string, title: string, priority: string, status: string, progress: number},
+  deleteTaskId: () => void,
+  showDeleteTaskModal: () => void,
+  showEditTaskModal: () => void,
+  setActualTask: () => void
 }
 
 export const TaskCard = ({task: { id, title, priority, status, progress }, 

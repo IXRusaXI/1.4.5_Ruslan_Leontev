@@ -4,18 +4,19 @@ import { Button } from './../../shared/Button/Button';
 import { Input } from './../../shared/Input/Input';
 import { Modal } from './../../shared/Modal/Modal';
 import './style.scss';
-import { useState } from 'react';
+import { Dispatch, MouseEventHandler, SetStateAction } from 'react';
 import Priority from './../../entities/serverData/priorityes'
 import PriorityTranslator from './../../entities/serverData/priorityesTranslator'
+import { Prioroty } from '../../app/types';
 
 type EditTaskModalProps = {
   closeModal: MouseEventHandler<HTMLButtonElement>,
-  apply: () => {},
-  setName: () => {},
+  apply: () => void,
+  setName: Dispatch<SetStateAction<string>>,
   name: string,
-  setPriority: () => {},
+  setPriority: Dispatch<SetStateAction<Prioroty>>,
   selectedPriority: string,
-  task: {}
+  task?: {}
 }
 
 export const AddEditTaskModal = ({

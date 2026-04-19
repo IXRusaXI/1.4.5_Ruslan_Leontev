@@ -1,21 +1,19 @@
 import style from './style.module.scss';
-import Add from './../../shared/icons/add.svg?react';
+import Add from './../../shared/icons/add.svg';
 import { AddEditTaskModal } from './../../features/AddEditTaskModal/AddEditTaskModal';
 import { Button } from './../../shared/Button/Button';
 import { DeleteModal } from '../DeleteModal/DeleteModal';
 import { TaskCard } from '../TaskCard/TaskCard';
-import { taskList } from './../../entities/serverData/taskList';
+import { Task, taskList } from './../../entities/serverData/taskList';
 import { useState } from 'react';
 import { Prioroty, Status } from './../../app/types';
 import { nanoid } from 'nanoid';
 
-
 export const TodoList = () => {
   const [list, setList] = useState(taskList)
-  const [lastId, setLastId] = useState(5)
   const [taskName, setTaskName] = useState('')
-  const [priority, setPriority] = useState('high')
-  const [actualTask, setActualTask] = useState({})
+  const [priority, setPriority] = useState<Prioroty>(Prioroty.HIGH)
+  const [actualTask, setActualTask] = useState({id: 'null'})
 
   const [showAddModal, setShowAddModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
@@ -63,7 +61,7 @@ export const TodoList = () => {
     setDeleteTaskId(id)
   }
 
-  function deleteTask(id: string) {
+  function deleteTask() {
     const newList = list.filter(task => task.id !== deleteTaskId)
     setList(newList)
     setDeleteTaskId('')
@@ -71,28 +69,33 @@ export const TodoList = () => {
 
   function closeCreateModal() {
     setShowAddModal(false)
-    setPriority('high')
+    setPriority(Prioroty.HIGH)
     setTaskName('')
   }
 
   function closeEditModal() {
     setShowEditModal(false)
-    setPriority('high')
+    setPriority(Prioroty.HIGH)
     setTaskName('')
   }
+
+  function getAddIcon() {
+    return <img src={Add} />
+  }
+
   return (
     <>
       <div className={style["page-wrapper"]}>
         <div className={style["top-title"]}>
           <h2>Список задач</h2>
-          <Button title="Добавить задачу" icon={<Add />} onClick={() => setShowAddModal(true)} />
+          <Button title="Добавить задачу" icon={getAddIcon()} onClick={() => setShowAddModal(true)} />
         </div>
         <div className={style["task-container"]}>
           {list.map((task) => (
-            <TaskCard key={task.id} id={task.id} task={task} 
+            <TaskCard key={task.id} task={task} 
               showDeleteTaskModal={() => setShowDeleteModal(true)} 
               showEditTaskModal={() => setShowEditModal(true)}
-              setActualTask={setActualTask}
+              setActualTask={() => setActualTask}
               deleteTaskId={() => setTaskId(task.id)}
             />
           ))}
@@ -116,7 +119,7 @@ export const TodoList = () => {
         setPriority={setPriority}
         selectedPriority={priority}
       />}
-      {showDeleteModal && <DeleteModal closeModal={() => setShowDeleteModal(false)}  deleteTask={() => deleteTask(getDeleteTaskId())}/>}
+      {showDeleteModal && <DeleteModal closeModal={() => setShowDeleteModal(false)}  deleteTask={() => deleteTask()}/>}
     </>
   );
 };

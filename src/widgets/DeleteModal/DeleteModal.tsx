@@ -3,8 +3,8 @@ import { Modal } from './../../shared/Modal/Modal';
 import style from './style.module.scss';
 
 type DeleteModalProps = {
-  closeModal: () => {},
-  deleteTask: () => {}
+  closeModal: () => void,
+  deleteTask: () => void
 }
 
 export const DeleteModal = ({closeModal, deleteTask}: DeleteModalProps) => {
