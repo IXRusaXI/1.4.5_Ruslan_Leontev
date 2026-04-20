@@ -12,7 +12,7 @@ type ButtonProps = {
 
 export const Button = ({ title, icon, outline, onClick }: ButtonProps) => {
   return (
-    <button type="button" className={classnames(outline && style.outline, style.button)} onClick={() => onClick()} >
+    <button type="button" className={classnames(outline && style.outline, style.button)} onClick={(evt) => onClick(evt)} >
       {icon && <span className={style.icon}>{icon}</span>}
       {title}
     </button>

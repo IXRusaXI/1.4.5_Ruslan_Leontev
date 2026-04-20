@@ -1,6 +1,11 @@
+import { ReactNode } from "react";
 import style from "./style.module.scss"
 
-export const Modal = ({ children }) => {
+interface ModalProps {
+  children: ReactNode;
+}
+
+export const Modal = ({ children }: ModalProps) => {
   return (
     <div className={style.modal}>
       <div className={style["modal-content"]}>{children}</div>
