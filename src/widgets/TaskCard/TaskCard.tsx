@@ -14,7 +14,7 @@ type TaskCardProps = {
   setActualTask: () => void
 }
 
-export const TaskCard = ({task: { id, title, priority, status, progress }, 
+export const TaskCard = ({task: { title, priority, status, progress }, 
   showDeleteTaskModal, 
   showEditTaskModal,
   setActualTask

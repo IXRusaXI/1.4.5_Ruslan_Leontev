@@ -4,10 +4,8 @@ import { Button } from './../../shared/Button/Button';
 import { Input } from './../../shared/Input/Input';
 import { Modal } from './../../shared/Modal/Modal';
 import './style.scss';
-import { Dispatch, MouseEventHandler, SetStateAction, SyntheticEvent } from 'react';
 import { Task } from '../../entities/serverData/taskList';
 import { useTypedDispatch, useTypedSelector } from './../../hooks/redux';
-import { modalActions } from './../../store/modalSlice';
 import { todoActions } from './../../store/todoListSlice';
 import { Priority, translatePriority } from '../../app/types';
 
