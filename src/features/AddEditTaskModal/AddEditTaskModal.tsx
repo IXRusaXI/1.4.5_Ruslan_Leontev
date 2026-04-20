@@ -1,54 +1,60 @@
 import classNames from 'classnames';
-import Close from './../../shared/icons/close.svg?react';
+import Close from './../../shared/icons/close.svg';
 import { Button } from './../../shared/Button/Button';
 import { Input } from './../../shared/Input/Input';
 import { Modal } from './../../shared/Modal/Modal';
 import './style.scss';
-import { Dispatch, MouseEventHandler, SetStateAction } from 'react';
-import Priority from './../../entities/serverData/priorityes'
-import PriorityTranslator from './../../entities/serverData/priorityesTranslator'
-import { Prioroty } from '../../app/types';
+import { Dispatch, MouseEventHandler, SetStateAction, SyntheticEvent } from 'react';
+import { Task } from '../../entities/serverData/taskList';
+import { useTypedDispatch, useTypedSelector } from './../../hooks/redux';
+import { modalActions } from './../../store/modalSlice';
+import { todoActions } from './../../store/todoListSlice';
+import { Priority, translatePriority } from '../../app/types';
 
 type EditTaskModalProps = {
-  closeModal: MouseEventHandler<HTMLButtonElement>,
-  apply: () => void,
-  setName: Dispatch<SetStateAction<string>>,
-  name: string,
-  setPriority: Dispatch<SetStateAction<Prioroty>>,
-  selectedPriority: string,
-  task?: {}
+  closeModal: () => void,
+  task?: Task | null
 }
 
 export const AddEditTaskModal = ({
   closeModal, 
-  apply, 
-  setName, 
-  name, 
-  selectedPriority,
-  setPriority,
-  task
 }: EditTaskModalProps) => {
-  if (task) {
-    setName(task.title)
-    setPriority(task.priority)
-  }
-  
-  function inputActive(evt) {
-    if (task) {
-      task.title = event.target.value
-      setName(event.target.value)
-    } else {
-      setName(event.target.value)
-    }
+  const dispatch = useTypedDispatch();
+
+  const isAddModalOpen = useTypedSelector((state) => state.modal.isAddModalOpen);
+  const isEditModalOpen = useTypedSelector((state) => state.modal.isEditModalOpen);
+
+  const actualTask = useTypedSelector((state) => state.todo.actualTask);
+
+  function inputActive(evt: React.ChangeEvent<HTMLInputElement>) {
+    if (!actualTask) return
+
+    dispatch(todoActions.setActualTask({
+      ...actualTask,
+      title: evt.target.value
+    }))
   }
 
-  function selectPriority(priority) {
-    if (task) {
-      task.priority = priority
-      setPriority(priority)
-    } else {
-      setPriority(priority)
+  function selectPriority(priority: Priority) {
+    if (!actualTask) return
+
+    dispatch(todoActions.setActualTask({
+      ...actualTask,
+      priority: priority
+    }))
+  }
+
+  function save() {
+    if (!actualTask) return
+
+    if (isAddModalOpen) {
+      dispatch(todoActions.addNewTodo(actualTask))
+    } else if (isEditModalOpen) {
+      dispatch(todoActions.editTodo(actualTask))
     }
+
+    dispatch(todoActions.clearTodo())
+    closeModal()
   }
 
   return (
@@ -56,15 +62,15 @@ export const AddEditTaskModal = ({
       <form>
         <div className="add-edit-modal">
           <div className="flx-between">
-            <span className="modal-title">{task ? 'Редактировать' : "Добавить"} задачу</span>
-            <Close className="cp" onClick={() => closeModal()} />
+            <span className="modal-title">{isEditModalOpen ? 'Редактировать' : "Добавить"} задачу</span>
+            <img src={Close} className="cp" onClick={() => closeModal()} />
           </div>
           <Input
             label="Задача"
             placeholder="Введите текст.."
             onChange={(evt) => inputActive(evt)}
             name="title"
-            value={name}
+            value={actualTask?.title}
           />
           <div className="modal-priority">
             <span>Приортитет</span>
@@ -75,16 +81,16 @@ export const AddEditTaskModal = ({
                   <li
                     key={priority}
                     onClick={() => selectPriority(priority)}
-                    className={classNames(`${priority}-selected`, priority, priority === selectedPriority && 'active')}
+                    className={classNames(`${priority}-selected`, priority, priority === actualTask?.priority && 'active')}
                   >
-                    {PriorityTranslator[priority]}
+                    {translatePriority(priority)}
                   </li>
                 );
               })}
             </ul>
           </div>
           <div className="flx-right mt-50">
-            <Button title={task ? 'Редактировать' : "Добавить"} onClick={() => apply(name)} />
+            <Button title={isEditModalOpen ? 'Редактировать' : "Добавить"} onClick={() => save()} />
           </div>
         </div>
       </form>

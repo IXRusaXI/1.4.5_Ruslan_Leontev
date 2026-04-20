@@ -1,41 +1,32 @@
 import classNames from 'classnames';
-import DeleteIcon from './../../shared/icons/delete.svg?react';
-import EditIcon from './../../shared/icons/edit.svg?react';
+import DeleteIcon from './../../shared/icons/delete.svg';
+import EditIcon from './../../shared/icons/edit.svg';
 import { CircularProgressBar } from './../../shared/CircularProgressBar/CircularProgressBar';
 import style from './style.module.scss';
 import { translatePriority, translateStatus } from './../../app/types';
-import { Dispatch, SetStateAction } from 'react';
+import { Task } from '../../entities/serverData/taskList';
 
 type TaskCardProps = {
-  task: {id: string, title: string, priority: string, status: string, progress: number},
-  deleteTaskId: () => void,
+  task: Task,
+  deleteTask: () => void,
   showDeleteTaskModal: () => void,
   showEditTaskModal: () => void,
   setActualTask: () => void
 }
 
 export const TaskCard = ({task: { id, title, priority, status, progress }, 
-  deleteTaskId, 
   showDeleteTaskModal, 
   showEditTaskModal,
   setActualTask
 }: TaskCardProps
 ) => {
-  const task = {
-    id: id,
-    title: title,
-    priority: priority,
-    status: status,
-    progress: progress,
-  }
-
   function deleteAction() {
-    deleteTaskId(),
+    setActualTask()
     showDeleteTaskModal()
   }
 
   function edit() {
-    setActualTask(task)
+    setActualTask()
     showEditTaskModal()
   }
 
@@ -64,8 +55,8 @@ export const TaskCard = ({task: { id, title, priority, status, progress },
         />
       </div>
       <div className={style['actions']}>
-        <EditIcon className="mr-20 cp" onClick={() => edit() } />
-        <DeleteIcon className="cp" onClick={() => deleteAction()} />
+        <img src={EditIcon} className="mr-20 cp" onClick={() => edit() } />
+        <img src={DeleteIcon} className="cp" onClick={() => deleteAction()} />
       </div>
     </div>
   );

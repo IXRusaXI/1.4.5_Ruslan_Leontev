@@ -1,4 +1,4 @@
-export enum Prioroty {
+export enum Priority {
   LOW = 'low', // Низкий
   MEDIUM = 'medium', // Средний
   HIGH = 'high', // Высокий
@@ -10,7 +10,7 @@ export enum Status {
   DONE = 'done', // Сделано
 }
 
-export function translatePriority(priority: Prioroty) {
+export function translatePriority(priority: Priority) {
   switch(priority) {
     case('low'):
       return 'Низкий'
